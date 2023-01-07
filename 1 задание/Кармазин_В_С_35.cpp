@@ -19,7 +19,7 @@ public:
     element* head;
     unsigned long int nop;
 
-    QueueWithOneHead() { //+1
+    QueueWithOneHead() { //+2
         head = 0;
         nop = 0;
     }
@@ -126,7 +126,7 @@ public:
     }
 };
 
-class QuickSort {
+class QuickSort { //n*(log(n))
 public:
     unsigned int long nop;
     void hoarasort(QueueWithOneHead* Q, int first, int last) { 
@@ -160,13 +160,13 @@ public:
         }
         if (i < last) {
             nop += 1;
-            hoarasort(Q, i, last); //log(n)
+            hoarasort(Q, i, last); 
         }
         if (first < j) {
             nop += 1;
-            hoarasort(Q, first, j); //log(n)
+            hoarasort(Q, first, j); 
         }
-    }
+    }   
 };
 
 int main() {
@@ -175,21 +175,28 @@ int main() {
     QuickSort* Sort = new QuickSort;
     int first = 0;
     int last;
+    Sort->nop = 0;
     for (int a = 300; a <= 3000; a += 300) {
         QueueWithOneHead* Queue = new QueueWithOneHead;
+        Queue->nop = 0;
         for (int b = 0; b <= a; b++) {
             Queue->enQueue(a - b);
         }
+        unsigned int start_time = 0;
+        unsigned int end_time = 0;
+        unsigned int final_time = 0;
         int last = a;
         Queue->indexing();
         cout << "n = " << a << endl;
-        unsigned int start_time = clock();
+        start_time = clock();
         Sort->hoarasort(Queue, first, last);
-        unsigned int end_time = clock();
-        unsigned int final_time = start_time - end_time;
-        cout << "Время выполнения программы: " << final_time / 1000 << endl;
+        end_time = clock();
+        final_time = end_time - start_time;
+        cout << "Время выполнения программы (mc): " << final_time << endl;
         cout << "NOP: " << Queue->nop+Sort->nop;
         cout << endl << endl;
+        Queue->nop = 0;
+        Sort->nop = 0;
     }
 
     return 0;
