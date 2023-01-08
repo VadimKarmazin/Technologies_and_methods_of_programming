@@ -257,7 +257,7 @@ public:
     }
 
 
-    void task(RandomizedBinarySearchTree rbst_1) {
+    RandomizedBinarySearchTree task(RandomizedBinarySearchTree rbst_1) {
 
         vector<int> a;
 
@@ -271,9 +271,11 @@ public:
                 }
             }
         }
+        RandomizedBinarySearchTree rbst_2;
         for (int i = 0; i < a.size(); i++) {
-            cout << a[i] << endl;
+            rbst_2.insert(a[i]);
         }
+        return rbst_2;
     }
 };
 
@@ -307,6 +309,7 @@ int main()
         cout << "3. Count Nodes " << endl;
         cout << "4. Check Empty" << endl;
         cout << "5. Clear" << endl;
+        cout << "6. Task" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice)
